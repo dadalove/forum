@@ -9,13 +9,12 @@
    <td>category: <%= @topic.category %></td>
   </tr>
 
-  <!-- <tr>
-    
-  </tr> -->
+  
 
   <% @topic.replies.each do |r| %>
     <tr>   
       <td>reply:<%= r.content %></td> 
+      <td><%= r.created_at %></td>
     </tr>  
   <% end %>
 

@@ -1,13 +1,30 @@
 <h1>Topic</h1>
 
-<%= link_to "new topic", new_topic_path %>
+<button type="button" class="btn btn-warning"><%= link_to "new topic", new_topic_path %></button>
 
+<br>
+<br>
 
-<table>
- <% @topics.each do |topic| %>
+<table class="table table-striped">
+
   <tr>
-   <td>title:<%= link_to topic.title, topic_path(topic) %></td>
-   <td>category:<%= topic.category %></td>
+    <th>title</th>
+    <th>category</th>
+    <th>user</th>
+    <th>date</th>
+    <th>replies</th>
+    <th>replie last</th>
+  </tr>
+
+ <% @topics.each do |topic| %>
+  
+  <tr>
+   <td><%= link_to topic.title, topic_path(topic) %></td>
+   <td><%= topic.categories.name %></td>
+   <td><%= topic.user.try(:email) %></td>
+   <td><%= topic.created_at %></td>
+   <td><%= topic.replies.size %></td>
+   <td><%= topic.replies.last %></td>
 
    <% if current_user == topic.user %>                               
     <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  
@@ -15,13 +32,5 @@
   </tr>
  <% end %>
 
-  <!-- <tr>
-   <td><%#= topic.date %></td>
-  </tr>
- -->
-   
-   
-  
- 
 </table>
 
