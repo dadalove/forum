@@ -1,11 +1,10 @@
 class TopicsController < ApplicationController
   
-  before_action :authenticate_user!, only:[:new,:create,:destroy] 
+  before_action :authenticate_user!
 
-  # def index
-  #   @topics = Topic.all
-  #   # @topic = Topic.new
-  # end
+  def index
+    redirect_to root_path
+  end
 
   def new
     @topic = Topic.new
@@ -13,6 +12,8 @@ class TopicsController < ApplicationController
 
   def create
     @topic = Topic.new(topic_params)
+    @topic.user = current_user
+
     if @topic.save
       redirect_to root_path
     else
@@ -40,7 +41,7 @@ class TopicsController < ApplicationController
   private
 
   def topic_params
-    params.require(:topic).permit(:title,:date,:category,:content)
+    params.require(:topic).permit(:title,:date,:content)
   end
 
   

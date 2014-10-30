@@ -13,14 +13,17 @@
     
   </tr> -->
 
-  <tr> 
-    <td>reply:<%= @reply.content %></td> 
-  </tr>  
+  <% @topic.replies.each do |r| %>
+    <tr>   
+      <td>reply:<%= r.content %></td> 
+    </tr>  
+  <% end %>
+
 </table>
 
 
 
-<%= form_for @reply do |f| %>
+<%= form_for @reply, :url => topic_replies_path(@topic) do |f| %>
   <%#= f.label :content, 'reply'%>
   <%= f.text_area :content %>
 

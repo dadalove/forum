@@ -8,17 +8,20 @@
   <tr>
    <td>title:<%= link_to topic.title, topic_path(topic) %></td>
    <td>category:<%= topic.category %></td>
+
+   <% if current_user == topic.user %>                               
+    <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  
+   <% end %>
   </tr>
+ <% end %>
 
   <!-- <tr>
    <td><%#= topic.date %></td>
   </tr>
  -->
    
-   <% if current_user == topic.user %>                               
-   <%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %> 
-   <% end %>
+   
   
- <% end %>
+ 
 </table>
 
