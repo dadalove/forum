@@ -6,6 +6,7 @@ class RepliesController < ApplicationController
 
   def create
     @reply = @topic.replies.build(reply_params)
+    @reply.user = current_user
 
     if @reply.save
       redirect_to topic_path(@topic)

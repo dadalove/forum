@@ -17,6 +17,7 @@
     <tr>   
       <td>reply:<%= r.content %></td> 
       <td>time:<%= r.created_at %></td>
+      <td>user:<%= r.user.try(:email) %></td> 
     </tr>  
   <% end %>
 
