@@ -1,20 +1,22 @@
 
-<table>
+<table class="table">
   <tr>
-    <td>title: <%= @topic.title %></td>
+    <th>title:</th>
+    <th>content:</th>
+    <th>category:</th>
   </tr>
-  
+
   <tr>
-   <td>content: <%= @topic.content %></td>
-   <td>category: <%= @topic.category %></td>
+    <td><%= @topic.title %></td> 
+    <td><%= @topic.content %></td> 
+    <td><%= @topic.categories %></td> 
   </tr>
 
   
-
   <% @topic.replies.each do |r| %>
     <tr>   
       <td>reply:<%= r.content %></td> 
-      <td><%= r.created_at %></td>
+      <td>time:<%= r.created_at %></td>
     </tr>  
   <% end %>
 
@@ -26,5 +28,9 @@
   <%#= f.label :content, 'reply'%>
   <%= f.text_area :content %>
 
-  <%= f.submit %>
+  <br>
+  <br>
+
+  <input class="btn btn-default" type="submit" value="Submit"><%#= f.submit %>
+  <button type="button" class="btn btn-success"><%= link_to "back", root_path %></button>
 <% end %>
