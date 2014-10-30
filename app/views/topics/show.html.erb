@@ -1,0 +1,28 @@
+
+<table>
+  <tr>
+    <td>title: <%= @topic.title %></td>
+  </tr>
+  
+  <tr>
+   <td>content: <%= @topic.content %></td>
+   <td>category: <%= @topic.category %></td>
+  </tr>
+
+  <!-- <tr>
+    
+  </tr> -->
+
+  <tr> 
+    <td>reply:<%= @reply.content %></td> 
+  </tr>  
+</table>
+
+
+
+<%= form_for @reply do |f| %>
+  <%#= f.label :content, 'reply'%>
+  <%= f.text_area :content %>
+
+  <%= f.submit %>
+<% end %>

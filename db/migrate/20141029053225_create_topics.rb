@@ -7,6 +7,7 @@ class CreateTopics < ActiveRecord::Migration
       t.string :category
       t.string :user
       t.date :date
+      t.integer :user_id
 
       t.timestamps
     end
