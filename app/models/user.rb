@@ -7,9 +7,8 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :reply
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) << :name
-    devise_parameter_sanitizer.for(:account_update) << :name        #使用者可以修改註冊資料
+  def full_name
+    self.name || self.email
   end
 
 end

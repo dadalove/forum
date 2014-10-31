@@ -37,7 +37,7 @@
 
       <% end %>
     </td>
-   <td><%= topic.user.try(:email) %></td>
+   <td><%= topic.user.full_name %></td>
    <td><%= topic.created_at %></td>
    <td><%= topic.replies.size %></td>
    <td><%= topic.replies.last.try(:content) %></td>
