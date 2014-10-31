@@ -17,11 +17,19 @@
     <tr>   
       <td>reply:<%= r.content %></td> 
       <td>time:<%= r.created_at %></td>
-      <td>user:<%= r.user.try(:email) %></td> 
+      <td>user:<%= r.user.try(:email) %></td>
+    
+
+   <% if @reply.user == current_user %>                               
+    <td><%= link_to "delete", topic_path(@topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  
+   <% end %>
+
+      
     </tr>  
   <% end %>
 
 </table>
+
 
 
 
