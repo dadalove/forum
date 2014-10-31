@@ -2,14 +2,13 @@
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
           <li role="presentation" class="active"><%= link_to "new topic", new_topic_path %></li>
-          <li role="presentation"><%= link_to "about" %></li>
+          <li role="presentation"><%= link_to "about", about_path %></li>
         </ul>
         <h1 class="text-muted">Topic</h1>
       </div>
 </div>
 
-
-
+  
 
 <!-- <button type="button" class="btn btn-warning"><%#= link_to "new topic", new_topic_path %></button> -->
 <!-- <button type="button" class="btn btn-success"><%#= link_to "about" %></button> -->
@@ -29,14 +28,19 @@
   </tr>
 
  <% @topics.each do |topic| %>
-  
   <tr>
    <td><%= link_to topic.title, topic_path(topic) %></td>
-   <td><%= topic.categories.name %></td>
+   <td>
+      <% topic.categories.each do |category| %>
+
+        <%= category.name %>
+
+      <% end %>
+    </td>
    <td><%= topic.user.try(:email) %></td>
    <td><%= topic.created_at %></td>
    <td><%= topic.replies.size %></td>
-   <td><%= topic.replies.last %></td>
+   <td><%= topic.replies.last.try(:content) %></td>
 
    <% if current_user == topic.user %>                               
     <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  

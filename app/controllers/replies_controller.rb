@@ -17,9 +17,11 @@ class RepliesController < ApplicationController
 
 
   def destroy
-    @reply = Reply.find(params[:id])
+    @reply = @topic.replies.find(params[:id])
+
     if @reply.user == current_user
-    @reply.destroy
+      
+      @reply.destroy
       redirect_to topic_path(@topic)
     else
       redirect_to topic_path(@topic)

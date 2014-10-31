@@ -9,7 +9,7 @@
   <tr>
     <td><%= @topic.title %></td> 
     <td><%= @topic.content %></td> 
-    <td><%= @topic.categories %></td> 
+    <td><%= @topic.categories.map(&:name).join(", ") %></td> 
   </tr>
 
   
@@ -20,17 +20,16 @@
       <td>user:<%= r.user.try(:email) %></td>
     
 
-   <% if @reply.user == current_user %>                               
-    <td><%= link_to "delete", topic_path(@topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  
-   <% end %>
+      <% if r.user == current_user %>                               
 
+        <td><%= link_to "delete", topic_reply_path(@topic, r), method: :delete, data: {confirm: 'are you sure?'} %></td>  
+
+       <% end %>
       
     </tr>  
   <% end %>
 
 </table>
-
-
 
 
 <%= form_for @reply, :url => topic_replies_path(@topic) do |f| %>
