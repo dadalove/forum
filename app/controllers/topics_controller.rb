@@ -4,6 +4,8 @@ class TopicsController < ApplicationController
 
   def index
     redirect_to root_path
+    sort_by = (params[:order] == 'name') ? 'name' : 'created_at'
+    @topics = Topic.order(sort_by).page(params[:page]).per(5)
   end
 
   def new
