@@ -23,12 +23,33 @@
 .signin_btn:hover{
   background-color: rgba(102, 170, 221,1);
 }
-.signin_page h2{
+.signin_page h2,
+.signup_page h2{
   margin-left: 57px
 }
 .other_link{
   text-align: center;
   margin-left: -27px;
   margin-top: 10px;
+}
+//
+
+
+//signup page
+.signup_page{
+  width: 250px;
+  margin: 5% auto;
+}
+.signup_btn{
+  font-size: 18px;
+  padding: 9px 79px;
+  border-radius: 5px;
+  border-style: none;
+  background-color: rgba(102, 170, 221, 0.8);
+  color: white;
+  margin-top: 10px;
+}
+.signup_btn:hover{
+  background-color: rgba(102, 170, 221, 1);
 }
 //
