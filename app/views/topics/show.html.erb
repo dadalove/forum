@@ -1,30 +1,42 @@
 
-<table class="table">
-  <tr>
+<table>
     <th>title:</th>
-    <th>content:</th>
+    <td><%= @topic.title %></td>
+
+    <tr></tr>
+
     <th>category:</th>
-  </tr>
+    <td><%= @topic.categories.map(&:name).join(", ") %></td>
+    
+    <tr></tr>
+    
+    <th>content:</th>
+    <td><%= @topic.content %></td>
+</table>
+  
+  <br>
+  <br>
+  <br>
 
-  <tr>
-    <td><%= @topic.title %></td> 
-    <td><%= @topic.content %></td> 
-    <td><%= @topic.categories.map(&:name).join(", ") %></td> 
-  </tr>
-
+<table class="table table-hover"> 
+    
+    <tr>   
+      <th>reply:</th> 
+      <th>user:</th>
+      <th>time:</th>
+      <th></th>
+    </tr>
   
   <% @topic.replies.each do |r| %>
-    <tr>   
-      <td>reply:<%= r.content %></td> 
-      <td>time:<%= r.created_at %></td>
-      <td>user:<%= r.user.try(:email) %></td>
     
-
+    <tr>
+      <td><%= r.content %></td> 
+      <td><%= r.user.try(:email) %></td>
+      <td><%= r.created_at %></td>  
+    
       <% if r.user == current_user %>                               
-
-        <td><%= link_to "delete", topic_reply_path(@topic, r), method: :delete, data: {confirm: 'are you sure?'} %></td>  
-
-       <% end %>
+        <td><%= link_to "delete", topic_reply_path(@topic, r), method: :delete, data: {confirm: 'are you sure?'} %></td> 
+      <% end %>
       
     </tr>  
   <% end %>
@@ -34,7 +46,7 @@
 
 <%= form_for @reply, :url => topic_replies_path(@topic) do |f| %>
   <%#= f.label :content, 'reply'%>
-  <%= f.text_area :content %>
+ <%= f.text_area :content %>
 
   <br>
   <br>

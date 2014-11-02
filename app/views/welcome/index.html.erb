@@ -8,7 +8,7 @@
       </div>
 </div>
 
-  
+
 
 <!-- <button type="button" class="btn btn-warning"><%#= link_to "new topic", new_topic_path %></button> -->
 <!-- <button type="button" class="btn btn-success"><%#= link_to "about" %></button> -->
@@ -22,9 +22,10 @@
     <th>title</th>
     <th>category</th>
     <th>user</th>
-    <th>date</th>
     <th>replies</th>
     <th>replie last</th>
+    <th>date</th>
+    <th></th>
   </tr>
 
  <% @topics.each do |topic| %>
@@ -38,13 +39,16 @@
       <% end %>
     </td>
    <td><%= topic.user.full_name %></td>
-   <td><%= topic.created_at %></td>
    <td><%= topic.replies.size %></td>
    <td><%= topic.replies.last.try(:content) %></td>
+   <td><%= topic.created_at %></td>
 
    <% if current_user == topic.user %>                               
-    <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>  
+    <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>
+   <% else %>
+    <td></td>
    <% end %>
+
   </tr>
  <% end %>
  
