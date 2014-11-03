@@ -3,4 +3,7 @@ class Topic < ActiveRecord::Base
   has_many :top_category_ships
   has_many :categories, :through => :top_category_ships
   has_many :replies
+
+  validates_presence_of :title
+  validates_presence_of :content
 end
