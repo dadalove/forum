@@ -18,13 +18,19 @@
 
 <table class="table table-striped">
 
+
+<%= form_for @topic do |f| %>
+ <div class="checkbox_wrap"><%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %></div>  <!-- 多選 -->
+<% end %>
+
+
   <tr>
-    <th>title</th>
-    <th>category</th>
-    <th>user</th>
-    <th>replies</th>
-    <th>replie last</th>
-    <th>date</th>
+    <th>Title</th>
+    <th>Category</th>
+    <th>User</th>
+    <th>Replies</th>
+    <th>Replie Last</th>
+    <th>Time</th>
     <th></th>
   </tr>
 
@@ -34,14 +40,14 @@
    <td>
       <% topic.categories.each do |category| %>
 
-        <%= link_to category.name, topics_path( :order => "name") %>       <!-- 點擊進去只可以看該分類的主題 -->
+        <%= category.name%>
  
       <% end %>
-    </td>
+   </td>
    <td><%= topic.user.full_name %></td>
    <td><%= topic.replies.size %></td>
    <td><%= topic.replies.last.try(:content) %></td>
-   <td><%= topic.created_at %></td>
+   <td><%= topic.created_at.strftime("%I:%M %p %b %d") %></td>
 
    <% if current_user == topic.user %>                               
     <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>

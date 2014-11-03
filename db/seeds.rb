@@ -9,3 +9,8 @@
 Category.create(:name => "商業")
 Category.create(:name => "技術")
 Category.create(:name => "心理")
+Category.create(:name => "科技")
+Category.create(:name => "財經")
+Category.create(:name => "娛樂")
+Category.create(:name => "設計")
+Category.create(:name => "行銷")
