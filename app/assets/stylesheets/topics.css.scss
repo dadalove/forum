@@ -3,6 +3,15 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
+.wrapper{
+  width: 95%;
+  margin: 0 auto; 
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+
 //signin page
 .signin_page{
   width: 250px;

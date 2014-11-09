@@ -6,7 +6,7 @@
     <tr></tr>
 
     <th>category:</th>
-    <td><%= @topic.categories.map(&:name).join(", ") %></td>
+    <td><%= @topic.categories.map(&:name).join(", ") %></td>       <!-- 顯示category -->
     
     <tr></tr>
     
@@ -18,8 +18,8 @@
   <br>
   <br>
 
-<table class="table table-hover"> 
-    
+
+<table class="table table-hover">                                   <!-- 回覆表單 -->
     <tr>   
       <th>reply:</th> 
       <th>user:</th>
@@ -28,23 +28,21 @@
     </tr>
   
   <% @topic.replies.each do |r| %>
-    
     <tr>
-      <td><%= r.content %></td> 
-      <td><%= r.user.try(:email) %></td>
-      <td><%= r.created_at %></td>  
+      <td><%= r.content %></td>                                   <!-- 回覆者內容 -->
+      <td><%= r.user.try(:email) %></td>                          <!-- 回覆者的email -->
+      <td><%= r.created_at.strftime("%I:%M %p %b %d") %></td>     <!-- 回復的時間 -->
     
-      <% if r.user == current_user %>                               
+      <% if r.user == current_user %>                             <!-- 回覆者等於登入的使用者 -->
         <td><%= link_to "delete", topic_reply_path(@topic, r), method: :delete, data: {confirm: 'are you sure?'} %></td> 
       <% end %>
       
     </tr>  
   <% end %>
-
 </table>
 
 
-<%= form_for @reply, :url => topic_replies_path(@topic) do |f| %>
+<%= form_for @reply, :url => topic_replies_path(@topic) do |f| %>      <!-- 回覆者的表單 -->
   <%#= f.label :content, 'reply'%>
  <%= f.text_area :content %>
 
@@ -54,3 +52,4 @@
   <input class="btn btn-default" type="submit" value="Submit"><%#= f.submit %>
   <button type="button" class="btn btn-success"><%= link_to "back", root_path %></button>
 <% end %>
+

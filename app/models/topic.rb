@@ -4,6 +4,10 @@ class Topic < ActiveRecord::Base
   has_many :categories, :through => :top_category_ships
   has_many :replies
 
-  validates_presence_of :title
-  validates_presence_of :content
+  validates_presence_of :title                   #空白必填
+  validates_presence_of :content                 #空白必填
+
+  
+
+
 end

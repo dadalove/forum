@@ -8,7 +8,7 @@
   <tr>
    <td><%= f.label :category,'category' %></td>
    <%#= f.select(:category, options_for_select([['科技','科技'],['商業','商業'],['技術','技術']])) %>
-   <td><%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %></td>
+   <td><%= f.collection_check_boxes(:category_ids, Category.all, :id, :name) %></td>        <!-- 多選欄位 -->
   </tr>
     
   <tr>

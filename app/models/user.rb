@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :reply
 
   def full_name
-    self.name || self.email
+    self.name || self.email                    #顯示姓名或email
   end
 
 end

@@ -1,11 +1,9 @@
 class TopicsController < ApplicationController
   
-  before_action :authenticate_user!
+  before_action :authenticate_user!                    #使用任何功能前都要先登入
 
   def index
-    redirect_to root_path
-    sort_by = (params[:order] == 'name') ? 'name' : 'created_at'
-    @topics = Topic.order(sort_by).page(params[:page]).per(5)
+    redirect_to root_path                              #回到welcome首頁
   end
 
   def new
@@ -23,24 +21,10 @@ class TopicsController < ApplicationController
     end  
   end
 
-  # def edit
-  #   @topic = Topic.find(params[:id])
-  # end
-
-  # def update
-  #   @topic = Topic.find(params[:id])
-  #   if topic.update(topic_params)
-  #     redirect_to topic_path(@topic)
-  #   else
-  #     redirect_to topic_path(@topic)
-  #   end
-  # end
-
-
 
   def show
     @topic = Topic.find(params[:id])
-    @reply = Reply.new
+    @reply = Reply.new                                 #各個主題都有回復表單
   end
 
 
@@ -62,7 +46,4 @@ class TopicsController < ApplicationController
   end
 
   
-
-
-
 end

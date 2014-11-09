@@ -2,21 +2,15 @@
       <div class="header">
         <ul class="nav nav-pills pull-right" role="tablist">
           <li role="presentation" class="active"><%= link_to "new topic", new_topic_path %></li>
-          <li role="presentation"><%= link_to "about", about_path %></li>
+          <li role="presentation"><%= link_to "about", about_path %></li>                      <!-- 連結about頁面 -->
         </ul>
         <h1 class="text-muted">Topic</h1>
       </div>
 </div>
 
-
-
-<!-- <button type="button" class="btn btn-warning"><%#= link_to "new topic", new_topic_path %></button> -->
-<!-- <button type="button" class="btn btn-success"><%#= link_to "about" %></button> -->
-
 <br>
 <br>
 
-<table class="table table-striped">
 
 
 <%= form_for @topic do |f| %>
@@ -24,40 +18,42 @@
 <% end %>
 
 
-  <tr>
-    <th>Title</th>
-    <th>Category</th>
-    <th>User</th>
-    <th>Replies</th>
-    <th>Replie Last</th>
-    <th>Time</th>
-    <th></th>
-  </tr>
+<div class="wrapper">                                                  <!-- 設定論壇主題寬度 -->
+  <table class="table table-striped">
 
- <% @topics.each do |topic| %>
-  <tr>
-   <td><%= link_to topic.title, topic_path(topic) %></td>
-   <td>
-      <% topic.categories.each do |category| %>
+    <tr>
+      <th>Title</th>
+      <th>Category</th>
+      <th>User</th>
+      <th>Replies</th>
+      <th>Replie Last</th>
+      <th><%= link_to "Time", root_path( :order => "time") %></th>     <!-- time可以依照時間排序 -->
+      <th></th>
+    </tr>
 
-        <%= category.name%>
- 
-      <% end %>
-   </td>
-   <td><%= topic.user.full_name %></td>
-   <td><%= topic.replies.size %></td>
-   <td><%= topic.replies.last.try(:content) %></td>
-   <td><%= topic.created_at.strftime("%I:%M %p %b %d") %></td>
+   <% @topics.each do |topic| %>
+    <tr>
+     <td><%= link_to topic.title, topic_path(topic) %></td>            <!-- 連結到topic頁面 -->
+     <td>
+        <% topic.categories.each do |category| %>
 
-   <% if current_user == topic.user %>                               
-    <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>
-   <% else %>
-    <td></td>
+          <%= category.name%>                                          <!-- 顯示category名稱，必須要包一個迴圈 -->
+   
+        <% end %>
+     </td>
+     <td><%= link_to topic.user.try(:full_name) %></td>                <!-- 顯示使用者名字 -->
+     <td><%= topic.replies.size %></td>                                <!-- 個主題的全部回覆數 -->
+     <td><%= topic.replies.last.try(:content) %></td>                  <!-- 最後一筆回覆的內容 -->
+     <td><%= topic.created_at.strftime("%I:%M %p %b %d") %></td>       <!-- 主題發文時間 -->
+
+     <% if current_user == topic.user %>                               <!-- 當登入的使用者等於發主題文的使用者 -->  
+      <td><%= link_to "delete", topic_path(topic), method: :delete, data: {confirm: 'are you sure?'} %></td>
+     <% else %>
+      <td></td>                                                        <!-- 為了良好的設計表現而加入這一行 -->
+     <% end %>
+    </tr>
    <% end %>
 
-  </tr>
- <% end %>
- 
-
-</table>
-<%= paginate @topics %>
+  </table>
+</div>
+<%= paginate @topics %>                                                <!-- 頁數 -->
